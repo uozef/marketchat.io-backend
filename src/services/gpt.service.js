@@ -1,7 +1,7 @@
 const axios = require('axios');
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const OPENAI_API_URL = 'https://api.openai.com/v1/engines/davinci/completions';
-async function getGPTResponse(prompt) {
+exports.getGPTResponse=async(prompt)=>{
     const headers = {
         'Authorization': `Bearer ${OPENAI_API_KEY}`,
         'Content-Type': 'application/json',
