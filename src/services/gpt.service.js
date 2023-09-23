@@ -1,6 +1,7 @@
-const OPENAI_API_BASE_URL = 'https://api.openai.com/v1/engines';
 const axios = require('axios');
-exports.getChatGPTResponse = async (prompt) => {
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+const OPENAI_API_URL = 'https://api.openai.com/v1/engines/davinci/completions';
+async function getGPTResponse(prompt) {
     const headers = {
         'Authorization': `Bearer ${OPENAI_API_KEY}`,
         'Content-Type': 'application/json',
@@ -11,6 +12,7 @@ exports.getChatGPTResponse = async (prompt) => {
         prompt: prompt,
         max_tokens: 150 // You can adjust this as needed
     };
+
     try {
         const response = await axios.post(OPENAI_API_URL, data, { headers: headers });
         return response.data.choices[0].text.trim();
@@ -18,4 +20,4 @@ exports.getChatGPTResponse = async (prompt) => {
         console.error('Error calling OpenAI API:', error);
         throw error;
     }
-};
+}
