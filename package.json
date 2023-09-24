@@ -4,7 +4,7 @@
   "description": "",
   "main": "csvToSql.js",
   "scripts": {
-    "start":"node src/index.js",
+    "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -19,6 +19,7 @@
     "helmet": "^7.0.0",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
-    "mysql2": "^3.6.1"
+    "mysql2": "^3.6.1",
+    "openai": "^4.10.0"
   }
 }

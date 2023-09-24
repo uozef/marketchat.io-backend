@@ -1,23 +1,22 @@
-const axios = require('axios');
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const OPENAI_API_URL = 'https://api.openai.com/v1/engines/davinci/completions';
+const OpenAI=require("openai");
+const openAI = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
 exports.getGPTResponse=async(prompt)=>{
-    const headers = {
-        'Authorization': `Bearer ${OPENAI_API_KEY}`,
-        'Content-Type': 'application/json',
-        'User-Agent': 'OpenAI-NodeJS-Client'
-    };
-
-    const data = {
-        prompt: prompt,
-        max_tokens: 150 // You can adjust this as needed
-    };
-
     try {
-        const response = await axios.post(OPENAI_API_URL, data, { headers: headers });
-        return response.data.choices[0].text.trim();
-    } catch (error) {
-        console.error('Error calling OpenAI API:', error);
-        throw error;
-    }
+        const completion = await openAI.chat.completions.create({
+            messages: [{ role: 'user', content: 'give me a nodejs boilerplate code"' }],
+            model: 'gpt-3.5-turbo',
+        });
+        return { result: completion.choices };
+      } catch(error) {
+        // Consider adjusting the error handling logic for your use case
+        if (error.response) {
+         throw Error(error.response.status, error.response.data)
+        } else {
+          console.error(`Error with OpenAI API request: ${error.message}`);
+         throw error;
+        }
+      }
 }
