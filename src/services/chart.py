@@ -1,16 +1,20 @@
 
 import matplotlib.pyplot as plt
 
-data = [{"company_name":"Apple"},{"company_name":"Microsoft"},{"company_name":"Alphabet Class C"},{"company_name":"Alphabet Class A"},{"company_name":"Amazon"}]
+# Example data
+data = [{"company_name": "Apple", "revenue": 100}, {"company_name": "Google", "revenue": 80}, {"company_name": "Microsoft", "revenue": 90}]
 
-company_names = [item['company_name'] for item in data]
+# Extract company names and revenue from data
+company_names = [d["company_name"] for d in data]
+revenues = [d["revenue"] for d in data]
 
-plt.bar(range(len(company_names)), [1]*len(company_names), tick_label=company_names)
+# Create a bar chart
+plt.bar(company_names, revenues)
 
-plt.xlabel('Company Names')
-plt.ylabel('Count')
+# Add labels and title
+plt.xlabel("Company")
+plt.ylabel("Revenue")
+plt.title("Revenue by Company")
 
-plt.title('Company Count Chart')
-
-plt.savefig('output.jpg')
-plt.show()
+# Save the chart as an image
+plt.savefig("output.jpg")
