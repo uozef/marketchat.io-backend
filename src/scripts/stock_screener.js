@@ -4,9 +4,9 @@ const ddlScript = fs?.readFileSync(`${__dirname}/DDL.sql`, "utf8");
 
 // Database configuration
 const dbConfig = {
-  host: "localhost",
-  user: "root",
-  password: "123",
+  host: "marketchat.c5v54pjgwoo3.us-east-1.rds.amazonaws.com",
+  user: "admin",
+  password: "QcWQ*B+9q!qc?M4",
   database: "marketchat",
 };
 
