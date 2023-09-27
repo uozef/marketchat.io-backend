@@ -18,7 +18,7 @@ exports.getStockDetail = async (stock) => {
         const baseUrl =  `https://tr-cdn.tipranks.com/bff/prod/stock/${stock}/payload.json?ver=${timestamp}`;
         const response = await axios.get(baseUrl);
         const dataPath=await saveDATA(JSON.stringify(response.data.charts),stock,timestamp);
-        const chart=drawForcastChart(dataPath);
+        await drawForcastChart(dataPath);
         return {filename:stock+"-"+timestamp};
       } catch (error) {
         // Log any error that occurs during the request
