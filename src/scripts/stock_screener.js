@@ -51002,51 +51002,51 @@ function transformData(inputData) {
     stock_price_change_ticker: inputData?.stockPriceChange?.ticker || null,
     stock_price_change_type_id:
       inputData?.stockPriceChange?.changeTypeID || null,
-    current_price: inputData?.currentPrice?.price || null,
-    current_price_time_of_day: inputData?.currentPrice?.timeOfDay || null,
-    current_price_date: inputData?.currentPrice?.date
-      ? new Date(inputData.currentPrice.date)
-      : null,
-    current_price_stock_id: inputData?.currentPrice?.stockId || null,
-    current_price_ticker: inputData?.currentPrice?.ticker || null,
-    current_price_type_id: inputData?.currentPrice?.priceTypeID || null,
-    current_price_currency_type_id:
-      inputData?.currentPrice?.currencyTypeID || null,
-    current_price_change: inputData?.currentPrice?.change || null,
-    current_price_change_percent:
-      inputData?.currentPrice?.changePercent || null,
-    current_price_last_reported_eps:
-      inputData?.currentPrice?.lastReportedEps || null,
-    current_price_next_earning_date:
-      inputData?.currentPrice?.nextEarningDate || null,
-    current_price_next_dividend_date:
-      inputData?.currentPrice?.nextDividendDate || null,
-    current_price_stock_type: inputData?.currentPrice?.stockType || null,
-    current_price_stock_type_id: inputData?.currentPrice?.stockTypeId || null,
-    current_price_sector_id: inputData?.currentPrice?.sectorId || null,
-    current_price_last_trade_price:
-      inputData?.currentPrice?.lastTradePrice || null,
-    current_price_last_trade_time_of_day:
-      inputData?.currentPrice?.lastTradeTimeOfDay || null,
-    current_price_last_trade_date: inputData?.currentPrice?.lastTradeDate
-      ? new Date(inputData.currentPrice.lastTradeDate)
-      : null,
-    current_price_stock_price_change:
-      inputData?.currentPrice?.stockPriceChange || null,
-    current_price_stock_price_change_percent:
-      inputData?.currentPrice?.stockPriceChangePercent || null,
-    current_price_stock_price_change_date: inputData?.currentPrice
-      ?.stockPriceChangeDate
-      ? new Date(inputData.currentPrice.stockPriceChangeDate)
-      : null,
-    current_price_stock_price_change_time_of_day:
-      inputData?.currentPrice?.stockPriceChangeTimeOfDay || null,
-    current_price_stock_price_change_stock_id:
-      inputData?.currentPrice?.stockPriceChangeStockId || null,
-    current_price_stock_price_change_ticker:
-      inputData?.currentPrice?.stockPriceChangeTicker || null,
-    current_price_stock_price_change_type_id:
-      inputData?.currentPrice?.stockPriceChangeTypeID || null,
+    // current_price: inputData?.currentPrice?.price || null,
+    // current_price_time_of_day: inputData?.currentPrice?.timeOfDay || null,
+    // current_price_date: inputData?.currentPrice?.date
+    //   ? new Date(inputData.currentPrice.date)
+    //   : null,
+    // current_price_stock_id: inputData?.currentPrice?.stockId || null,
+    // current_price_ticker: inputData?.currentPrice?.ticker || null,
+    // current_price_type_id: inputData?.currentPrice?.priceTypeID || null,
+    // current_price_currency_type_id:
+    //   inputData?.currentPrice?.currencyTypeID || null,
+    // current_price_change: inputData?.currentPrice?.change || null,
+    // current_price_change_percent:
+    //   inputData?.currentPrice?.changePercent || null,
+    // current_price_last_reported_eps:
+    //   inputData?.currentPrice?.lastReportedEps || null,
+    // current_price_next_earning_date:
+    //   inputData?.currentPrice?.nextEarningDate || null,
+    // current_price_next_dividend_date:
+    //   inputData?.currentPrice?.nextDividendDate || null,
+    // current_price_stock_type: inputData?.currentPrice?.stockType || null,
+    // current_price_stock_type_id: inputData?.currentPrice?.stockTypeId || null,
+    // current_price_sector_id: inputData?.currentPrice?.sectorId || null,
+    // current_price_last_trade_price:
+    //   inputData?.currentPrice?.lastTradePrice || null,
+    // current_price_last_trade_time_of_day:
+    //   inputData?.currentPrice?.lastTradeTimeOfDay || null,
+    // current_price_last_trade_date: inputData?.currentPrice?.lastTradeDate
+    //   ? new Date(inputData.currentPrice.lastTradeDate)
+    //   : null,
+    // current_price_stock_price_change:
+    //   inputData?.currentPrice?.stockPriceChange || null,
+    // current_price_stock_price_change_percent:
+    //   inputData?.currentPrice?.stockPriceChangePercent || null,
+    // current_price_stock_price_change_date: inputData?.currentPrice
+    //   ?.stockPriceChangeDate
+    //   ? new Date(inputData.currentPrice.stockPriceChangeDate)
+    //   : null,
+    // current_price_stock_price_change_time_of_day:
+    //   inputData?.currentPrice?.stockPriceChangeTimeOfDay || null,
+    // current_price_stock_price_change_stock_id:
+    //   inputData?.currentPrice?.stockPriceChangeStockId || null,
+    // current_price_stock_price_change_ticker:
+    //   inputData?.currentPrice?.stockPriceChangeTicker || null,
+    // current_price_stock_price_change_type_id:
+    //   inputData?.currentPrice?.stockPriceChangeTypeID || null,
     next_dividend_date_consensus: inputData?.nextDividendDate?.consensus,
     last_reported_eps_date: inputData?.lastReportedEps?.date,
     last_reported_eps: inputData?.lastReportedEps?.eps,

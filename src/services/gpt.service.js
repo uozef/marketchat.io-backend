@@ -22,9 +22,8 @@ exports.getGPTResponse = async (prompt) => {
       completion.choices[0].message.content
     );
     const result = await runQuery(query);
-    const pythonCode = await getGPTChart(JSON.stringify(result[0]));
-    const url=await drawChart(pythonCode);
-    return { result: url };
+    const url = await getGPTChart(JSON.stringify(result[0]));
+    return { result: url ,data:result[0]};
   } catch (error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
@@ -47,7 +46,8 @@ const getGPTChart = async (prompt) => {
       completion.choices[0].message.content
     );
     const resutlfilePath=await saveCode(pythonCode);
-    await drawChart(resutlfilePath);
+    const url=await drawChart(resutlfilePath);
+    return url;
   } catch (error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {

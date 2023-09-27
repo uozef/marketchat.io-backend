@@ -1,5 +1,5 @@
 const { exec } = require("child_process");
-
+const fs=require('fs');
 const path=require("path");
 exports.drawChart = async (pythonPath) => {
   try {
@@ -14,7 +14,8 @@ exports.drawChart = async (pythonPath) => {
           console.error(`Python Error: ${stderr}`);
         }
       });
-    return path.join(__dirname, 'output.png');
+      const url=await moveFileToPublic();
+    return url;
   } catch (error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
@@ -50,3 +51,15 @@ exports.drawForcastChart = async (dataPath) => {
     }
   }
 };
+
+async function moveFileToPublic() {
+  const timestamp = new Date().getTime();
+  const sourcePath = './output.jpg';
+  const destinationPath = `public/charts/ch-${timestamp}.jpg`;
+  try {
+    await fs.promises.rename(sourcePath, destinationPath);
+   return `ch-${timestamp}`;
+  } catch (err) {
+    console.error(`Error moving or renaming the file: ${err}`);
+  }
+}
