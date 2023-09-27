@@ -22,11 +22,9 @@ exports.getGPTResponse = async (prompt) => {
       completion.choices[0].message.content
     );
     const result = await runQuery(query);
-
-    console.log(result[0]);
     const pythonCode = await getGPTChart(JSON.stringify(result[0]));
-    await drawChart(pythonCode);
-    return { result: result[0] };
+    const url=await drawChart(pythonCode);
+    return { result: url };
   } catch (error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
