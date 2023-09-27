@@ -1,20 +1,19 @@
 
 import matplotlib.pyplot as plt
 
-# Example data
-data = [{"company_name": "Apple", "revenue": 100}, {"company_name": "Google", "revenue": 80}, {"company_name": "Microsoft", "revenue": 90}]
+data = [{"company_name":"VMware","dividend":27.399},{"company_name":"RELX plc","dividend":17}]
 
-# Extract company names and revenue from data
-company_names = [d["company_name"] for d in data]
-revenues = [d["revenue"] for d in data]
+# Extract company names and dividend amounts from data
+companies = [d['company_name'] for d in data]
+dividends = [d['dividend'] for d in data]
 
-# Create a bar chart
-plt.bar(company_names, revenues)
+# Create bar chart
+plt.bar(companies, dividends)
+plt.xlabel('Company')
+plt.ylabel('Dividend')
 
-# Add labels and title
-plt.xlabel("Company")
-plt.ylabel("Revenue")
-plt.title("Revenue by Company")
+# Save the chart as output.jpg
+plt.savefig('output.jpg')
 
-# Save the chart as an image
-plt.savefig("output.jpg")
+# Display the chart
+plt.show()

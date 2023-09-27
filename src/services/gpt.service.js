@@ -6,7 +6,7 @@ const openAI = new OpenAI({
 const fs = require("fs");
 const util = require("util");
 const { drawChart } = require("./chart.service");
-const tipranksService = require('../services/tiprank.service');
+const tipranksService = require("../services/tiprank.service");
 const readFileAsync = util.promisify(fs.readFile);
 
 exports.getGPTResponse = async (prompt) => {
@@ -18,31 +18,32 @@ exports.getGPTResponse = async (prompt) => {
       messages: [{ role: "user", content: prePrompt + prompt }],
       model: "gpt-3.5-turbo",
     });
-    if (completion?.choices[0]?.message?.content!=null){
+    if (completion?.choices[0]?.message?.content != null) {
       console.log(completion?.choices[0]?.message?.content);
       const query = extractSubstringBetweenHashes(
         completion?.choices[0]?.message?.content
       );
-      if (query!=null){
-        console.log("this is query",query)
+      if (query != null) {
+        console.log("this is query", query);
         const result = await runQuery(query);
-        const resultStocks=result[0];
+        const resultStocks = result[0];
         let detail;
-        if (resultStocks.length==1){
-          const stock=resultStocks[0]['ticker'].toLowerCase();
-          detail=await tipranksService.getStockDetail(stock);
-        }else{
-      const url = await getGPTChart(JSON.stringify(result[0]));
-        }    
-        return { data:resultStocks,detail:detail};
-      }else{
+        if (resultStocks.length == 1) {
+          const stock = resultStocks[0]["ticker"].toLowerCase();
+          detail = await tipranksService.getStockDetail(stock);
+        } else {
+          const filename = await getGPTChart(JSON.stringify(result[0]));
+          detail = {
+            filename: filename,
+          };
+        }
+        return { data: resultStocks, detail: detail };
+      } else {
         throw Error("null query");
       }
-    }else{
+    } else {
       throw Error("null GPT");
     }
-  
-    
   } catch (error) {
     console.log(error);
     // Consider adjusting the error handling logic for your use case
@@ -65,8 +66,8 @@ const getGPTChart = async (prompt) => {
     const pythonCode = extractBetweenBackticksPython(
       completion.choices[0].message.content
     );
-    const resutlfilePath=await saveCode(pythonCode);
-    const url=await drawChart(resutlfilePath);
+    const resutlfilePath = await saveCode(pythonCode);
+    const url = await drawChart(resutlfilePath);
     return url;
   } catch (error) {
     // Consider adjusting the error handling logic for your use case
@@ -79,17 +80,15 @@ const getGPTChart = async (prompt) => {
   }
 };
 function extractSubstringBetweenHashes(inputString) {
-  const regex = /#(.*?)#/g;
-  const matches = [];
-  let match;
+  const regex = /\(([^)]+)\)/;
+  const match = regex.exec(inputString);
 
-  while ((match = regex.exec(inputString)) !== null) {
-    matches.push(match[1]);
+  if (match && match[1]) {
+    return match[1];
+  } else {
+    return null; // Handle the case where no match is found
   }
-
-  return matches[0];
 }
-
 const extractBetweenBackticksPython = (text) => {
   const regex = /```(.*?)```/s;
   const match = text.match(regex);
@@ -113,11 +112,10 @@ const runQuery = async (query) => {
 
 const saveCode = async (code) => {
   try {
-    await fs.promises.writeFile(__dirname+"/chart.py", code);
+    await fs.promises.writeFile(__dirname + "/chart.py", code);
     return `${__dirname}/chart.py`;
     console.log("Successfully wrote to the file");
   } catch (err) {
     console.error("Error writing to the file", err);
   }
-
 };
