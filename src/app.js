@@ -14,7 +14,7 @@ app.use(helmet());
 
 // Middleware to enable CORS
 app.use(cors());
-
+app.use(express.static('public'));
 // Middleware for request logging
 app.use(morgan('combined'));
 

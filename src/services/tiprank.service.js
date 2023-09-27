@@ -18,7 +18,7 @@ exports.getStockDetail = async (stock) => {
         const response = await axios.get(baseUrl);
         const dataPath=await saveDATA(JSON.stringify(response.data.charts),stock,timestamp);
         const chart=drawForcastChart(dataPath);
-        return chart;
+        return {filename:stock+"-"+timestamp};
       } catch (error) {
         // Log any error that occurs during the request
         console.error('Error sending GET request:', error);

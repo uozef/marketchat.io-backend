@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import json
 import sys  # Import the sys module to access command-line arguments
-
+import os
 # Check if the correct number of command-line arguments are provided
 if len(sys.argv) != 2:
     print("Usage: python script.py <file_path>")
@@ -75,5 +75,6 @@ plt.title("Apple Share Price Forecast")
 plt.xlabel("Days")
 plt.ylabel("Price")
 
-# Show the plot
-plt.show()
+# Show the plot/plt.show()
+file_name = os.path.basename(file_path)
+plt.savefig("./public/charts/"+os.path.splitext(file_name)[0]+".jpg")
