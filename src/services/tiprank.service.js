@@ -4,6 +4,7 @@ const fs=require('fs')
 const saveDATA = async (data,stock,timestamp) => {
     try {
         const path=__dirname+`/python/data/${stock}-${timestamp}.json`;
+        
       await fs.promises.writeFile(path, data);
       return path;
     } catch (err) {
