@@ -1,0 +1,2 @@
+base on the provided data use matplotlib.pyplot to draw a chart using python and save the chart as output image in output.jpg file 
+data :
