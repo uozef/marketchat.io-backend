@@ -23,20 +23,41 @@ exports.getGPTResponse = async (prompt) => {
       const query = completion?.choices[0]?.message?.content
       
       if (query != null) {
-        console.log("this is query", query);
-        const result = await runQuery(query);
-        const resultStocks = result[0];
-        let detail;
-        if (resultStocks.length == 1) {
-          const stock = resultStocks[0]["ticker"].toLowerCase();
-          detail = await tipranksService.getStockDetail(stock);
-        } else {
-          const filename = await getGPTChart(JSON.stringify(result[0]));
+        let queryResult;
+        let resultStocks;
+        let detail='';
+          let detailAnswer;
+          let askPrompt;
+        try{
+           queryResult = await runQuery(query);
+           resultStocks = queryResult[0];
+          
+        }catch(error){
+
+        }
+        if (resultStocks?.length == 1) {
+          const stock = resultStocks[0]["ticker"]?.toLowerCase();
+          if (stock){
+            detail = await tipranksService.getStockDetail(stock);
+            askPrompt=`this is stock comapmny symbol ${stock} give me essential detail for investor about this company`
+          }else{
+             askPrompt=prompt;
+          }
+        } if (resultStocks?.length >1) {
+          const filename = await getGPTChart(JSON.stringify(resultStocks[0]));
           detail = {
             filename: filename,
           };
+          askPrompt=`this is stock data of different companies ${JSON.stringify(resultStocks)} give me essential detail for investor about this data`
+        }else{
+          askPrompt=prompt;
+          
         }
-        return { data: resultStocks, detail: detail };
+        detailAnswer = await openAI.chat.completions.create({
+          messages: [{ role: "user", content:  askPrompt }],
+          model: "gpt-3.5-turbo",
+        });
+        return { data: resultStocks, detail: detail,content: detailAnswer?.choices[0]?.message?.content};
       } else {
         throw Error("null query");
       }

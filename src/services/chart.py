@@ -1,20 +1,19 @@
 
 import matplotlib.pyplot as plt
 
-data = [
-    {"ticker":"AAPL"},{"ticker":"TSLA"},{"ticker":"TCTZF"},{"ticker":"ORCL"},{"ticker":"ASML"},{"ticker":"ADBE"},{"ticker":"CSCO"},
-    {"ticker":"ACN"},{"ticker":"CRM"},{"ticker":"NFLX"},{"ticker":"SAP"},{"ticker":"QCOM"},{"ticker":"AMAT"},{"ticker":"ADI"},
-    {"ticker":"LRCX"},{"ticker":"MU"},{"ticker":"NTES"},{"ticker":"RLXXF"},{"ticker":"SHOP"},{"ticker":"PYPL"},{"ticker":"KLAC"}
-]
+# Data
+data = {"id": 1, "ticker": "AAPL", "company_name": "Apple"}
 
-tickers = [d['ticker'] for d in data]
+# Create a bar chart
+plt.bar(data["id"], data["ticker"])
 
-# Prepare the chart
-fig, ax = plt.subplots()
-ax.barh(range(len(tickers)), [1] * len(tickers), align='center', height=0.4)
-ax.set_yticks(range(len(tickers)))
-ax.set_yticklabels(tickers)
-ax.set_xlabel('Value')
+# Set chart title and labels
+plt.title("Company Ticker")
+plt.xlabel("Company ID")
+plt.ylabel("Ticker")
 
-# Save the chart as an image
-plt.savefig('output.jpg')
+# Save the chart as output image
+plt.savefig("output.jpg")
+
+# Display the chart
+plt.show()
