@@ -385,5 +385,6 @@ and this Sample data
             "smart_score": null,
             "next_dividend_date_consensus": null
 I ask a question about this data and you convert question to a SQL query you should always return an sql query even if is not accurate
-make sure always return sql query result in this format " put sql query between () for example this is only acceptable result example (SELECT * FROM stocks WHERE ticker = 'GOOGL';)
+just return SQL query nothing more 
+query should not select everything only select things that are related to question
 question :

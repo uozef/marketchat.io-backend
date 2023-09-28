@@ -1,19 +1,20 @@
 
 import matplotlib.pyplot as plt
 
-data = [{"company_name":"VMware","dividend":27.399},{"company_name":"RELX plc","dividend":17}]
+data = [
+    {"ticker":"AAPL"},{"ticker":"TSLA"},{"ticker":"TCTZF"},{"ticker":"ORCL"},{"ticker":"ASML"},{"ticker":"ADBE"},{"ticker":"CSCO"},
+    {"ticker":"ACN"},{"ticker":"CRM"},{"ticker":"NFLX"},{"ticker":"SAP"},{"ticker":"QCOM"},{"ticker":"AMAT"},{"ticker":"ADI"},
+    {"ticker":"LRCX"},{"ticker":"MU"},{"ticker":"NTES"},{"ticker":"RLXXF"},{"ticker":"SHOP"},{"ticker":"PYPL"},{"ticker":"KLAC"}
+]
 
-# Extract company names and dividend amounts from data
-companies = [d['company_name'] for d in data]
-dividends = [d['dividend'] for d in data]
+tickers = [d['ticker'] for d in data]
 
-# Create bar chart
-plt.bar(companies, dividends)
-plt.xlabel('Company')
-plt.ylabel('Dividend')
+# Prepare the chart
+fig, ax = plt.subplots()
+ax.barh(range(len(tickers)), [1] * len(tickers), align='center', height=0.4)
+ax.set_yticks(range(len(tickers)))
+ax.set_yticklabels(tickers)
+ax.set_xlabel('Value')
 
-# Save the chart as output.jpg
+# Save the chart as an image
 plt.savefig('output.jpg')
-
-# Display the chart
-plt.show()

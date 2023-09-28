@@ -20,9 +20,8 @@ exports.getGPTResponse = async (prompt) => {
     });
     if (completion?.choices[0]?.message?.content != null) {
       console.log(completion?.choices[0]?.message?.content);
-      const query = extractSubstringBetweenHashes(
-        completion?.choices[0]?.message?.content
-      );
+      const query = completion?.choices[0]?.message?.content
+      
       if (query != null) {
         console.log("this is query", query);
         const result = await runQuery(query);
@@ -79,16 +78,16 @@ const getGPTChart = async (prompt) => {
     }
   }
 };
-function extractSubstringBetweenHashes(inputString) {
-  const regex = /\(([^)]+)\)/;
-  const match = regex.exec(inputString);
+const extractBetweenBackticks = (text) => {
+  const regex = /```(.*?)```/s;
+  const match = text.match(regex);
 
   if (match && match[1]) {
-    return match[1];
-  } else {
-    return null; // Handle the case where no match is found
+    return match[1].replace(/\n/g, " ").replace("sql", "");
   }
-}
+
+  return match[1];
+};
 const extractBetweenBackticksPython = (text) => {
   const regex = /```(.*?)```/s;
   const match = text.match(regex);

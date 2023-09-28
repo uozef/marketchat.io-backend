@@ -30,7 +30,7 @@ exports.drawChart = async (pythonPath) => {
 exports.drawForcastChart = async (dataPath) => {
   try {
 
-    exec(`python3 "${__dirname}/python/forcast_chart.py" ${dataPath}`, (error, stdout, stderr) => {
+    await exec(`python3 "${__dirname}/python/forcast_chart.py" ${dataPath}`, (error, stdout, stderr) => {
         if (error) {
           console.error(`exec error: ${error}`);
           return;
