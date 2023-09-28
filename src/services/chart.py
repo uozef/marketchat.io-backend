@@ -1,19 +1,14 @@
 
 import matplotlib.pyplot as plt
 
-# Data
-data = {"id": 1, "ticker": "AAPL", "company_name": "Apple"}
+data = {"company_name": "Apple"}
 
-# Create a bar chart
-plt.bar(data["id"], data["ticker"])
+# Plotting the chart
+plt.bar(data.keys(), data.values())
 
-# Set chart title and labels
-plt.title("Company Ticker")
-plt.xlabel("Company ID")
-plt.ylabel("Ticker")
+# Adding labels
+plt.xlabel("Company")
+plt.ylabel("Value")
 
-# Save the chart as output image
-plt.savefig("output.jpg")
-
-# Display the chart
-plt.show()
+# Saving the chart as an image
+plt.savefig('output.jpg')
