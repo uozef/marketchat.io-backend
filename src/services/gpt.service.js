@@ -41,7 +41,7 @@ exports.getGPTResponse = async (prompt) => {
             detail = await tipranksService.getStockDetail(stock);
             askPrompt=`this is stock comapmny symbol ${stock} give me essential detail for investor about this company`
           }
-        } if (resultStocks?.length >1) {
+        } else if (resultStocks?.length >1) {
           const filename = await getGPTChart(JSON.stringify(resultStocks[0]));
           detail = {
             filename: filename,
