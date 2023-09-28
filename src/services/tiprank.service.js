@@ -17,11 +17,54 @@ exports.getStockDetail = async (stock) => {
         const timestamp = new Date().getTime();
         const baseUrl =  `https://tr-cdn.tipranks.com/bff/prod/stock/${stock}/payload.json?ver=${timestamp}`;
         const response = await axios.get(baseUrl);
-        const dataPath=await saveDATA(JSON.stringify(response.data.charts),stock,timestamp);
+        const targets=calculatePriceTargetStats(response.data.analysts.ratings);
+        const withCompanyName={
+          companyName:stock,
+          isHaveData:response.data.charts.isHaveData,
+          forcast:{
+            min:targets.lowestPriceTarget,
+            max:targets.highestPriceTarget,
+            avg:targets.averagePriceTarget
+          }
+          
+        };
+  
+        const dataPath=await saveDATA(JSON.stringify(withCompanyName),stock,timestamp);
         await drawForcastChart(dataPath);
         return {filename:stock+"-"+timestamp};
       } catch (error) {
         // Log any error that occurs during the request
         console.error('Error sending GET request:', error);
       }
+}
+function calculatePriceTargetStats(ratings) {
+  let highestPriceTarget = Number.MIN_VALUE;
+  let lowestPriceTarget = Number.MAX_VALUE;
+  let totalPriceTarget = 0;
+  let count = 0; // Keep track of the number of non-null values
+
+  ratings.forEach((rating) => {
+    const priceTarget = rating?.priceTarget?.value;
+    if (priceTarget !== null) {
+      count++; // Increment count for non-null values
+      totalPriceTarget += priceTarget;
+
+      if (priceTarget > highestPriceTarget) {
+        highestPriceTarget = priceTarget;
+      }
+
+      if (priceTarget < lowestPriceTarget) {
+        lowestPriceTarget = priceTarget;
+      }
+    }
+  });
+
+  // Check if there are non-null values before calculating the average
+  const averagePriceTarget = (parseFloat(lowestPriceTarget)+parseFloat(highestPriceTarget))/2
+
+  return {
+    highestPriceTarget,
+    lowestPriceTarget,
+    averagePriceTarget
+  };
 }
