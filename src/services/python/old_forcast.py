@@ -35,8 +35,8 @@ last_price = prices[-1]
 
 # Generate future forecast data
 future_max = np.linspace(last_price, last_price + last_price*0.2, FORECAST_DAYS)
-future_min = np.linspace(last_price, last_price _ last_price*0.05, FORECAST_DAYS)
-future_mean = np.linspace(last_price, last_price -last_price*0.1, FORECAST_DAYS)
+future_min = np.linspace(last_price, last_price + last_price*0.05, FORECAST_DAYS)
+future_mean = np.linspace(last_price, last_price - last_price*0.1, FORECAST_DAYS)
 
 # Calculate percentage changes
 max_pct_change = ((future_max[-1] - last_price) / last_price) * 100
