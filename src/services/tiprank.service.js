@@ -38,8 +38,8 @@ exports.getStockDetail = async (stock) => {
       }
 }
 function calculatePriceTargetStats(ratings) {
-  let highestPriceTarget = 0;
-  let lowestPriceTarget = 0;
+  let highestPriceTarget = Number.MIN_VALUE;
+  let lowestPriceTarget = Number.MAX_VALUE;
   let totalPriceTarget = 0;
   let count = 0; // Keep track of the number of non-null values
 
