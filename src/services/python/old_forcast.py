@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 # Constants
 HISTORICAL_DAYS = 753  # 12 months of historical data
-FORECAST_DAYS = 63     # 3 months of forecast
+FORECAST_DAYS = 365     # 3 months of forecast
 START_PRICE = 100      # Starting price of the share
 FLUCTUATION_MIN = -10  # Minimum daily fluctuation
 FLUCTUATION_MAX = 10   # Maximum daily fluctuation
