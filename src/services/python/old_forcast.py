@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Constants
-HISTORICAL_DAYS = 753  # 12 months of historical data
+  # 12 months of historical data
 FORECAST_DAYS = 365     # 3 months of forecast
 START_PRICE = 100      # Starting price of the share
 FLUCTUATION_MIN = -10  # Minimum daily fluctuation
@@ -26,17 +26,17 @@ with open(file_path, "r") as file:
 
 # Extract relevant data into lists
 dates = [entry["date"] for entry in price_data]
-prices = [entry["price"] for entry in price_data][0:754]
-
+prices = [entry["price"] for entry in price_data]
+HISTORICAL_DAYS = len(prices)-1
 # Convert prices to numpy array
 prices = np.array(prices)
 
 last_price = prices[-1]
 
 # Generate future forecast data
-future_max = np.linspace(last_price, last_price + last_price*0.2, FORECAST_DAYS)
-future_min = np.linspace(last_price, last_price + last_price*0.05, FORECAST_DAYS)
-future_mean = np.linspace(last_price, last_price - last_price*0.1, FORECAST_DAYS)
+future_max = np.linspace(last_price, last_price + 60, FORECAST_DAYS)
+future_min = np.linspace(last_price, last_price - 30, FORECAST_DAYS)
+future_mean = np.linspace(last_price, last_price + 10, FORECAST_DAYS)
 
 # Calculate percentage changes
 max_pct_change = ((future_max[-1] - last_price) / last_price) * 100
