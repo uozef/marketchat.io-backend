@@ -26,7 +26,7 @@ with open(file_path, "r") as file:
 
 # Extract relevant data into lists
 dates = [entry["date"] for entry in price_data]
-prices = [entry["price"] for entry in price_data]
+prices = [entry["price"] for entry in price_data][0:754]
 
 # Convert prices to numpy array
 prices = np.array(prices)

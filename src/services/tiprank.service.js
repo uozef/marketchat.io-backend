@@ -43,6 +43,8 @@ function calculatePriceTargetStats(ratings) {
   let totalPriceTarget = 0;
   let count = 0; // Keep track of the number of non-null values
 
+  if (ratings?.lenght!=null){
+
   ratings.forEach((rating) => {
     const priceTarget = rating?.priceTarget?.value;
     if (priceTarget !== null) {
@@ -58,6 +60,8 @@ function calculatePriceTargetStats(ratings) {
       }
     }
   });
+  }
+
 
   // Check if there are non-null values before calculating the average
   const averagePriceTarget = (parseFloat(lowestPriceTarget)+parseFloat(highestPriceTarget))/2
