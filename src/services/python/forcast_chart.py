@@ -35,9 +35,9 @@ FLUCTUATION_MAX = 10
 last_price = prices[-1]
 
 # Get forecast values from the data
-forecast_max = forecast.get("max", last_price + 60)
-forecast_min = forecast.get("min", last_price - 30)
-forecast_avg = forecast.get("avg", last_price + 10)
+forecast_max = forecast.get("max", last_price + last_price*0.1)
+forecast_min = forecast.get("min", last_price + last_price*0.05)
+forecast_avg = forecast.get("avg", last_price - last_price*0.01)
 
 # Generate future forecast data
 future_max = np.linspace(last_price, forecast_max, FORECAST_DAYS)
