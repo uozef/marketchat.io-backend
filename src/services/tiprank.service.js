@@ -38,15 +38,16 @@ exports.getStockDetail = async (stock) => {
       }
 }
 function calculatePriceTargetStats(ratings) {
-  let highestPriceTarget = Number.MIN_VALUE;
-  let lowestPriceTarget = Number.MAX_VALUE;
+  let highestPriceTarget = 0;
+  let lowestPriceTarget = 0;
   let totalPriceTarget = 0;
   let count = 0; // Keep track of the number of non-null values
 
-  if (ratings?.lenght!=null){
+  if (ratings?.length!=null){
 
   ratings.forEach((rating) => {
     const priceTarget = rating?.priceTarget?.value;
+    console.log(priceTarget);
     if (priceTarget !== null) {
       count++; // Increment count for non-null values
       totalPriceTarget += priceTarget;
@@ -60,9 +61,13 @@ function calculatePriceTargetStats(ratings) {
       }
     }
   });
+  }else{
+    console.log(ratings);
   }
 
 
+  console.log(highestPriceTarget);
+  console.log(lowestPriceTarget);
   // Check if there are non-null values before calculating the average
   const averagePriceTarget = (parseFloat(lowestPriceTarget)+parseFloat(highestPriceTarget))/2
 
