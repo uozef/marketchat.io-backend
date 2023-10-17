@@ -32,8 +32,7 @@ exports.ask = async (req, res) => {
         if (!req.body.prompt) {
             return res.status(400).json({ error: "Prompt is required" });
         }
-        const user_id=1;
-        const prompt = req.body.prompt;
+        const {prompt,user_id} = req.body.prompt;
          await chatServices.saveChat(user_id,"user",prompt);
         const response = await chatgptService.ask(user_id,prompt);
         await chatServices.saveChat(user_id,"assistant",response.toString());
