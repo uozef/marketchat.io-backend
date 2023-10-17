@@ -17,10 +17,10 @@ exports.askChatGPTForQuery = async (req, res) => {
 
 exports.getChats = async (req, res) => {
     try {
-        if (!req.body.userId) {
+        if (!req.params.userId) {
             return res.status(400).json({ error: "invalid userId" });
         }
-        const {userId} = req.body;
+        const {userId} = req.params;
         const response = await chatServices.getChats(userId);
         res.json(response);
     } catch (error) {
