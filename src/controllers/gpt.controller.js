@@ -1,7 +1,7 @@
 const chatgptService = require('../services/gpt.service');
+const chatServices = require('../services/chat.service');
 const chartService = require('../services/chart.service');
 const tipranksService = require('../services/tiprank.service');
-
 exports.askChatGPTForQuery = async (req, res) => {
     try {
         if (!req.body.prompt) {
@@ -10,6 +10,34 @@ exports.askChatGPTForQuery = async (req, res) => {
         const prompt = req.body.prompt;
         const response = await chatgptService.getGPTResponse(prompt);
         res.json(response);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.getChats = async (req, res) => {
+    try {
+        if (!req.body.userId) {
+            return res.status(400).json({ error: "invalid userId" });
+        }
+        const {userId} = req.body;
+        const response = await chatServices.getChats(userId);
+        res.json(response);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+exports.ask = async (req, res) => {
+    try {
+        if (!req.body.prompt) {
+            return res.status(400).json({ error: "Prompt is required" });
+        }
+        const user_id=1;
+        const prompt = req.body.prompt;
+         await chatServices.saveChat(user_id,"user",prompt);
+        const response = await chatgptService.ask(user_id,prompt);
+        await chatServices.saveChat(user_id,"assistant",response.toString());
+        res.json({result:response});
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -29,7 +57,7 @@ exports.askChatGPTForDrawChart = async (req, res) => {
 };
 exports.drawChart = async (req, res) => {
     try {
-        
+
         const response = await chartService.drawChart();
         res.json(response);
     } catch (error) {
@@ -37,10 +65,9 @@ exports.drawChart = async (req, res) => {
     }
 };
 
-
 exports.singleStockDetail = async (req, res) => {
     try {
-        
+
         const {stock}=req.body;
         const response = await tipranksService.getStockDetail(stock);
         res.json(response);

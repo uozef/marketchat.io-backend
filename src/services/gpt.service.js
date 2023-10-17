@@ -6,12 +6,13 @@ const openAI = new OpenAI({
 const fs = require("fs");
 const util = require("util");
 const { drawChart } = require("./chart.service");
+const { saveChat,getChats} = require("./chat.service");
 const tipranksService = require("../services/tiprank.service");
 const readFileAsync = util.promisify(fs.readFile);
+const filePath = __dirname + "/../prompts/ddl_prompt.txt";
 
 exports.getGPTResponse = async (prompt) => {
   try {
-    const filePath = __dirname + "/../prompts/ddl_prompt.txt";
     const prePrompt = await readFileAsync(filePath, "utf8");
 
     const completion = await openAI.chat.completions.create({
@@ -21,7 +22,7 @@ exports.getGPTResponse = async (prompt) => {
     if (completion?.choices[0]?.message?.content != null) {
       console.log(completion?.choices[0]?.message?.content);
       const query = completion?.choices[0]?.message?.content
-      
+
       if (query != null) {
         let queryResult;
         let resultStocks;
@@ -31,7 +32,7 @@ exports.getGPTResponse = async (prompt) => {
         try{
            queryResult = await runQuery(query);
            resultStocks = queryResult[0];
-          
+
         }catch(error){
 
         }
@@ -49,7 +50,7 @@ exports.getGPTResponse = async (prompt) => {
           askPrompt=`this is stock data of different companies ${JSON.stringify(resultStocks)} give me essential detail for investor about this data`
         }else{
           askPrompt=prompt;
-          
+
         }
         detailAnswer = await openAI.chat.completions.create({
           messages: [{ role: "user", content:  askPrompt }],
@@ -73,6 +74,36 @@ exports.getGPTResponse = async (prompt) => {
     }
   }
 };
+exports.ask = async (userId,prompt) => {
+  try {
+    const prePrompt = await readFileAsync(filePath, "utf8");
+    const chats=await getChats(userId);
+    const conversation = chats.map((entry) => `${entry.role}: ${entry.message}`).join('\n');
+    const finalPrompt = `${conversation}\nUser: ${prompt}`;
+    await saveChat(userId,"user",prompt);
+    const completion = await openAI.chat.completions.create({
+      messages: [{ role: "user", content:   finalPrompt }],
+      model: "gpt-3.5-turbo",
+    });
+    const result=completion?.choices[0]?.message?.content;
+    if (result != null) {
+      await saveChat(userId,"assistant",result);
+      return result;
+    } else {
+      throw Error("null GPT");
+    }
+  } catch (error) {
+    console.log(error);
+    // Consider adjusting the error handling logic for your use case
+    if (error.response) {
+      throw Error(error.response.status, error.response.data);
+    } else {
+      console.error(`Error with OpenAI API request: ${error.message}`);
+      throw error;
+    }
+  }
+};
+
 const getGPTChart = async (prompt) => {
   try {
     const filePath = __dirname + "/../prompts/chart_prompt.txt";
