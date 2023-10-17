@@ -80,14 +80,12 @@ exports.ask = async (userId,prompt) => {
     const chats=await getChats(userId);
     const conversation = chats.map((entry) => `${entry.role}: ${entry.message}`).join('\n');
     const finalPrompt = `${conversation}\nUser: ${prompt}`;
-    await saveChat(userId,"user",prompt);
     const completion = await openAI.chat.completions.create({
       messages: [{ role: "user", content:   finalPrompt }],
       model: "gpt-3.5-turbo",
     });
     const result=completion?.choices[0]?.message?.content;
     if (result != null) {
-      await saveChat(userId,"assistant",result);
       return result;
     } else {
       throw Error("null GPT");
