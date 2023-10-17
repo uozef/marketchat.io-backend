@@ -1,0 +1,252 @@
+[
+  {
+    "ticker": "AAPL",
+    "name": "Apple Inc.",
+    "companyId": 24937
+  },
+  {
+    "ticker": "MSFT",
+    "name": "Microsoft Corporation",
+    "companyId": 21835
+  },
+  {
+    "ticker": "2222",
+    "name": "Saudi Arabian Oil Company",
+    "companyId": 1241120
+  },
+  {
+    "ticker": "GOOGL",
+    "name": "Alphabet Inc.",
+    "companyId": 29096
+  },
+  {
+    "ticker": "AMZN",
+    "name": "Amazon.com, Inc.",
+    "companyId": 18749
+  },
+  {
+    "ticker": "NVDA",
+    "name": "NVIDIA Corporation",
+    "companyId": 32307
+  },
+  {
+    "ticker": "META",
+    "name": "Meta Platforms, Inc.",
+    "companyId": 20765463
+  },
+  {
+    "ticker": "TSLA",
+    "name": "Tesla, Inc.",
+    "companyId": 27444752
+  },
+  {
+    "ticker": "BRK.A",
+    "name": "Berkshire Hathaway Inc.",
+    "companyId": 255251
+  },
+  {
+    "ticker": "LLY",
+    "name": "Eli Lilly and Company",
+    "companyId": 285467
+  },
+  {
+    "ticker": "UNH",
+    "name": "UnitedHealth Group Incorporated",
+    "companyId": 104673
+  },
+  {
+    "ticker": "V",
+    "name": "Visa Inc.",
+    "companyId": 38043467
+  },
+  {
+    "ticker": "NOVO B",
+    "name": "Novo Nordisk A/S",
+    "companyId": 323452
+  },
+  {
+    "ticker": "2330",
+    "name": "Taiwan Semiconductor Manufacturing Company Limited",
+    "companyId": 380075
+  },
+  {
+    "ticker": "XOM",
+    "name": "Exxon Mobil Corporation",
+    "companyId": 406338
+  },
+  {
+    "ticker": "WMT",
+    "name": "Walmart Inc.",
+    "companyId": 313055
+  },
+  {
+    "ticker": "JPM",
+    "name": "JPMorgan Chase & Co.",
+    "companyId": 658776
+  },
+  {
+    "ticker": "JNJ",
+    "name": "Johnson & Johnson",
+    "companyId": 139677
+  },
+  {
+    "ticker": "MA",
+    "name": "Mastercard Incorporated",
+    "companyId": 6477196
+  },
+  {
+    "ticker": "700",
+    "name": "Tencent Holdings Limited",
+    "companyId": 11042136
+  },
+  {
+    "ticker": "AVGO",
+    "name": "Broadcom Inc.",
+    "companyId": 25016048
+  },
+  {
+    "ticker": "MC",
+    "name": "LVMH Moët Hennessy - Louis Vuitton, Société Européenne",
+    "companyId": 195488
+  },
+  {
+    "ticker": "PG",
+    "name": "The Procter & Gamble Company",
+    "companyId": 33328
+  },
+  {
+    "ticker": "A005930",
+    "name": "Samsung Electronics Co., Ltd.",
+    "companyId": 91868
+  },
+  {
+    "ticker": "CVX",
+    "name": "Chevron Corporation",
+    "companyId": 98506
+  },
+  {
+    "ticker": "NESN",
+    "name": "Nestlé S.A.",
+    "companyId": 31973
+  },
+  {
+    "ticker": "600519",
+    "name": "Kweichow Moutai Co., Ltd.",
+    "companyId": 9475874
+  },
+  {
+    "ticker": "ORCL",
+    "name": "Oracle Corporation",
+    "companyId": 22247
+  },
+  {
+    "ticker": "HD",
+    "name": "The Home Depot, Inc.",
+    "companyId": 278679
+  },
+  {
+    "ticker": "MRK",
+    "name": "Merck & Co., Inc.",
+    "companyId": 288502
+  },
+  {
+    "ticker": "ABBV",
+    "name": "AbbVie Inc.",
+    "companyId": 141885706
+  },
+  {
+    "ticker": "COST",
+    "name": "Costco Wholesale Corporation",
+    "companyId": 92817
+  },
+  {
+    "ticker": "ADBE",
+    "name": "Adobe Inc.",
+    "companyId": 24321
+  },
+  {
+    "ticker": "7203",
+    "name": "Toyota Motor Corporation",
+    "companyId": 319676
+  },
+  {
+    "ticker": "IHC",
+    "name": "International Holding Company PJSC",
+    "companyId": 603641347
+  },
+  {
+    "ticker": "ASML",
+    "name": "ASML Holding N.V.",
+    "companyId": 388904
+  },
+  {
+    "ticker": "KO",
+    "name": "The Coca-Cola Company",
+    "companyId": 26642
+  },
+  {
+    "ticker": "ROG",
+    "name": "Roche Holding AG",
+    "companyId": 687140
+  },
+  {
+    "ticker": "1398",
+    "name": "Industrial and Commercial Bank of China Limited",
+    "companyId": 23734930
+  },
+  {
+    "ticker": "PEP",
+    "name": "PepsiCo, Inc.",
+    "companyId": 32854
+  },
+  {
+    "ticker": "SHEL",
+    "name": "Shell plc",
+    "companyId": 22385966
+  },
+  {
+    "ticker": "CSCO",
+    "name": "Cisco Systems, Inc.",
+    "companyId": 19691
+  },
+  {
+    "ticker": "OR",
+    "name": "L'Oréal S.A.",
+    "companyId": 874249
+  },
+  {
+    "ticker": "BABA",
+    "name": "Alibaba Group Holding Limited",
+    "companyId": 42083601
+  },
+  {
+    "ticker": "BAC",
+    "name": "Bank of America Corporation",
+    "companyId": 19049
+  },
+  {
+    "ticker": "AZN",
+    "name": "AstraZeneca PLC",
+    "companyId": 336774
+  },
+  {
+    "ticker": "NOVN",
+    "name": "Novartis AG",
+    "companyId": 382553
+  },
+  {
+    "ticker": "CRM",
+    "name": "Salesforce, Inc.",
+    "companyId": 122917
+  },
+  {
+    "ticker": "ACN",
+    "name": "Accenture plc",
+    "companyId": 972190
+  },
+  {
+    "ticker": "TMO",
+    "name": "Thermo Fisher Scientific Inc.",
+    "companyId": 97023
+  }
+]

@@ -74,6 +74,7 @@ exports.getGPTResponse = async (prompt) => {
     }
   }
 };
+
 exports.ask = async (userId,prompt) => {
   try {
     const prePrompt = await readFileAsync(filePath, "utf8");
@@ -87,6 +88,31 @@ exports.ask = async (userId,prompt) => {
     const result=completion?.choices[0]?.message?.content;
     if (result != null) {
       return result;
+    } else {
+      throw Error("null GPT");
+    }
+  } catch (error) {
+    console.log(error);
+    // Consider adjusting the error handling logic for your use case
+    if (error.response) {
+      throw Error(error.response.status, error.response.data);
+    } else {
+      console.error(`Error with OpenAI API request: ${error.message}`);
+      throw error;
+    }
+  }
+};
+
+exports.askForTicker = async (prompt) => {
+  try {
+    const completion = await openAI.chat.completions.create({
+      messages: [{ role: "user", content:   `try to find nearest stock market ticker symbol to user question for example if asked about apple return AAPL just return stock symbol nothing more question: ${prompt}` }],
+      model: "gpt-3.5-turbo",
+    });
+    const result=completion?.choices[0]?.message?.content;
+    if (result != null) {
+      const detail=await tipranksService.getStockDetail(result);
+      return detail;
     } else {
       throw Error("null GPT");
     }

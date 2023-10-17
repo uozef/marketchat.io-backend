@@ -1,1 +1,0 @@
-// Importing required modules\nconst express = require('express');\n\n// Creating Express app\nconst app = express();\n\n// Setting up port\nconst port = process.env.PORT || 3000;\n\n// Creating a route\napp.get('/', (req, res) => {\n  res.send('Hello, World!');\n});\n\n// Starting the server\napp.listen(port, () => {\n  console.log(`Server is running on port ${port}`);\n});\n

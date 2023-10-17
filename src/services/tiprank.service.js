@@ -4,13 +4,13 @@ const fs=require('fs')
 const saveDATA = async (data,stock,timestamp) => {
     try {
         const path=__dirname+`/python/data/${stock}-${timestamp}.json`;
-        
+
       await fs.promises.writeFile(path, data);
       return path;
     } catch (err) {
         console.log(err)
     }
-  
+
   };
 exports.getStockDetail = async (stock) => {
     try {
@@ -26,12 +26,9 @@ exports.getStockDetail = async (stock) => {
             max:targets.highestPriceTarget,
             avg:targets.averagePriceTarget
           }
-          
+
         };
-  
-        const dataPath=await saveDATA(JSON.stringify(withCompanyName),stock,timestamp);
-        await drawForcastChart(dataPath);
-        return {filename:stock+"-"+timestamp};
+        return withCompanyName;
       } catch (error) {
         // Log any error that occurs during the request
         console.error('Error sending GET request:', error);
