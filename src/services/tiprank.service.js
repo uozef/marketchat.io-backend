@@ -15,7 +15,7 @@ const saveDATA = async (data,stock,timestamp) => {
 exports.getStockDetail = async (stock) => {
     try {
         const timestamp = new Date().getTime();
-        const baseUrl =  `https://giaiw3yby0.execute-api.ap-southeast-2.amazonaws.com/Test/bff/prod/stock/${stock}/payload.json?ver=${timestamp}`;
+        const baseUrl =  `https://giaiw3yby0.execute-api.ap-southeast-2.amazonaws.com/Test/bff/prod/stock/${stock.toLowerCase()}/payload.json?ver=${timestamp}`;
         const response = await axios.get(baseUrl);
         const targets=calculatePriceTargetStats(response.data.analysts.ratings);
         const withCompanyName={

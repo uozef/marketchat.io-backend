@@ -87,6 +87,7 @@ exports.ask = async (userId,prompt) => {
     });
     const result=completion?.choices[0]?.message?.content;
     if (result != null) {
+
       return result;
     } else {
       throw Error("null GPT");
@@ -106,13 +107,15 @@ exports.ask = async (userId,prompt) => {
 exports.askForTicker = async (prompt) => {
   try {
     const completion = await openAI.chat.completions.create({
-      messages: [{ role: "user", content:   `try to find nearest stock market ticker symbol to user question for example if asked about apple return AAPL just return stock symbol nothing more question: ${prompt}` }],
+      messages: [{ role: "user", content:   `assume you are market analyst try to find nearest stock market symbol to user question no matter how accurate it is just return a symbol for example if asked about apple return #AAPL# just return stock symbol in response nothing more and without any detail question: ${prompt}` }],
       model: "gpt-3.5-turbo",
     });
     const result=completion?.choices[0]?.message?.content;
+    console.log(result);
     if (result != null) {
-      const detail=await tipranksService.getStockDetail(result);
-      return detail;
+      const ticker=extractStringBetweenHashDollar(result);
+      //const detail=await tipranksService.getStockDetail(ticker);
+      return ticker;
     } else {
       throw Error("null GPT");
     }
@@ -171,6 +174,16 @@ const extractBetweenBackticksPython = (text) => {
   }
   return match[1];
 };
+
+function extractStringBetweenHashDollar(inputString) {
+  try{
+    const matches = inputString.match(/#(.*?)#/);
+    return matches && matches[1];
+  }catch (e) {
+    console.log(e);
+  }
+
+}
 
 const runQuery = async (query) => {
   try {

@@ -14,6 +14,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.TEXT, // Use TEXT for longer text messages
             allowNull: true, // Adjust this based on your requirements
         },
+        ticker: {
+            type: DataTypes.STRING, // Use TEXT for longer text messages
+            allowNull: true, // Adjust this based on your requirements
+        },
         user_id:{
             type: DataTypes.INTEGER,
         },
