@@ -37,7 +37,7 @@ exports.ask = async (req, res) => {
         const response = await chatgptService.ask(user_id,prompt);
         const ticker = await chatgptService.askForTicker(prompt);
         await chatServices.saveChat(user_id,"assistant",response.toString(),ticker);
-        res.json({result:response,detail:responseTicker});
+        res.json({result:response});
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
