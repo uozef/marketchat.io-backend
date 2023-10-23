@@ -32,12 +32,12 @@ exports.ask = async (req, res) => {
         if (!req.body.prompt) {
             return res.status(400).json({ error: "Prompt is required" });
         }
-        const {user_id}=req;
+        const {userId}=req;
         const {prompt,chat_id} = req.body;
-        const response = await chatgptService.ask(user_id,prompt,chat_id);
-        const newChatId=await chatServices.saveChat(user_id,"user",prompt,"",chat_id);
+        const response = await chatgptService.ask(userId,prompt,chat_id);
+        const newChatId=await chatServices.saveChat(userId,"user",prompt,"",chat_id);
         const ticker = await chatgptService.askForTicker(prompt);
-        await chatServices.saveChat(user_id,"assistant",response.toString(),ticker,newChatId);
+        await chatServices.saveChat(userId,"assistant",response.toString(),ticker,newChatId);
         res.json({result:response});
     } catch (error) {
         res.status(500).json({ error: error.message });

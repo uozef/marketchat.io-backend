@@ -29,6 +29,7 @@ exports.saveChat = async (userId, role, text, ticker, chatId) => {
         const timestamp = new Date();
 
         if (!chatId) {
+            console.log(userId);
             const newChat = await chat.create({timestamp, user_id: userId});
             chatId = newChat.id;
         }

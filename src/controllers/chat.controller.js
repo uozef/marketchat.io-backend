@@ -2,10 +2,10 @@ const chatServices = require('../services/chat.service');
 
 exports.getChats = async (req, res) => {
     try {
-        if (!req.userId) {
+        const {userId} = req;
+        if (!userId) {
             return res.status(400).json({ error: "invalid userId" });
         }
-        const {userId} = req.params;
         const response = await chatServices.getChats(userId);
         res.json(response);
     } catch (error) {
