@@ -6,7 +6,7 @@ exports.getChats = async (userId) => {
         console.log("print");
         const cards = await chat.findAll({
             where: {user_id: userId},
-            attributes:['message','timestamp','role','ticker']
+            attributes:['message','timestamp','role','ticker','id']
         });
         console.log("pp");
         return cards;
