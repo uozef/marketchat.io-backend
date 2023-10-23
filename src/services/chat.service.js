@@ -6,7 +6,7 @@ exports.getChats = async (userId) => {
         console.log("print");
         const cards = await chat.findAll({
             where: {user_id: userId},
-            attributes: ['user_id', 'id']
+            attributes: ['user_id', 'id','title']
         });
         return cards;
     } catch (error) {
@@ -30,7 +30,7 @@ exports.saveChat = async (userId, role, text, ticker, chatId) => {
 
         if (!chatId) {
             console.log(userId);
-            const newChat = await chat.create({timestamp, user_id: userId});
+            const newChat = await chat.create({timestamp, user_id: userId,title:getFirstTwoWords(text)});
             chatId = newChat.id;
         }
 
@@ -48,3 +48,11 @@ exports.saveChat = async (userId, role, text, ticker, chatId) => {
     }
 };
 
+function getFirstTwoWords(inputString) {
+    const words = inputString.split(' ');
+    if (words.length >= 2) {
+        return words.slice(0, 2).join(' ');
+    } else {
+        return inputString; // Return the original string if there are fewer than two words.
+    }
+}
