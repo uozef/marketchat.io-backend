@@ -6,18 +6,6 @@ module.exports = function (sequelize, DataTypes) {
             primaryKey: true,
             autoIncrement: true,
         },
-        role: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        message: {
-            type: DataTypes.TEXT, // Use TEXT for longer text messages
-            allowNull: true, // Adjust this based on your requirements
-        },
-        ticker: {
-            type: DataTypes.STRING, // Use TEXT for longer text messages
-            allowNull: true, // Adjust this based on your requirements
-        },
         user_id:{
             type: DataTypes.INTEGER,
         },

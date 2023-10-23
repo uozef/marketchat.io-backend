@@ -6,7 +6,7 @@ const openAI = new OpenAI({
 const fs = require("fs");
 const util = require("util");
 const { drawChart } = require("./chart.service");
-const { saveChat,getChats} = require("./chat.service");
+const { saveChat,getChatMessages} = require("./chat.service");
 const tipranksService = require("../services/tiprank.service");
 const readFileAsync = util.promisify(fs.readFile);
 const filePath = __dirname + "/../prompts/ddl_prompt.txt";
@@ -75,12 +75,15 @@ exports.getGPTResponse = async (prompt) => {
   }
 };
 
-exports.ask = async (userId,prompt) => {
+exports.ask = async (userId,prompt,chatId) => {
   try {
     const prePrompt = await readFileAsync(filePath, "utf8");
-    const chats=await getChats(userId);
-    const conversation = chats.map((entry) => `${entry.role}: ${entry.message}`).join('\n');
-    const finalPrompt = `${conversation}\nUser: ${prompt}`;
+    let conversations;
+    if (chatId){
+      const chats=await getChatMessages(chatId);
+      conversations = chats.map((entry) => `${entry.role}: ${entry.message}`).join('\n');
+    }
+    const finalPrompt = `${conversations}\nUser: ${prompt}`;
     const completion = await openAI.chat.completions.create({
       messages: [{ role: "user", content:   finalPrompt }],
       model: "gpt-3.5-turbo",
@@ -96,6 +99,7 @@ exports.ask = async (userId,prompt) => {
     console.log(error);
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
+
       throw Error(error.response.status, error.response.data);
     } else {
       console.error(`Error with OpenAI API request: ${error.message}`);
