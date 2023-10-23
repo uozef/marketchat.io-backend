@@ -30,7 +30,7 @@ exports.saveChat = async (userId, role, text, ticker, chatId) => {
 
         if (!chatId) {
             console.log(userId);
-            const newChat = await chat.create({timestamp, user_id: userId,title:getFirstTwoWords(text)});
+            const newChat = await chat.create({timestamp, user_id: userId,title:getWords(text)});
             chatId = newChat.id;
         }
 
@@ -48,11 +48,18 @@ exports.saveChat = async (userId, role, text, ticker, chatId) => {
     }
 };
 
-function getFirstTwoWords(inputString) {
+function getWords(inputString) {
     const words = inputString.split(' ');
-    if (words.length >= 2) {
-        return words.slice(0, 2).join(' ');
+    let count;
+
+    if (words.length === 2) {
+        count = 2;
+    } else if (words.length === 3) {
+        count = 3;
     } else {
-        return inputString; // Return the original string if there are fewer than two words.
+        count = 4;
     }
+
+    return words.slice(0, count).join(' ');
 }
+
